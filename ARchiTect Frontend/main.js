@@ -1,4 +1,4 @@
 //navbar
-import { Navbar } from "./navbar.js";
-const navbar = new Navbar();
+import { Architect } from "./architect.js";
+const navbar = new Architect();
 navbar.crtajMainKontejner(document.body);

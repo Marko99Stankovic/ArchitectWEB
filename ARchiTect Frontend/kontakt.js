@@ -24,8 +24,6 @@ export class Kontakt{
         let labela;
         let polje;
 
-        
-
         nizLabela.forEach((el, indeks) => {
             labela = document.createElement("label");
             labela.innerHTML = el;
