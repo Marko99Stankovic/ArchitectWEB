@@ -1,0 +1,5 @@
+/*U planu je rekonfigureacija citavog sajta.
+Funkcije za iscrtavanje Carousela (sekcija Galerija i Projekti) ce biti zamenjene 
+modulima (klasama). // slicno kao kontakt.js
+
+*/

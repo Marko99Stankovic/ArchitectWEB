@@ -1,0 +1,339 @@
+/* Generalno podesavanje za glavnu strukturu */
+body {
+   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('https://wallpaperaccess.com/full/7273960.jpg');
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-attachment: fixed;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 0;
+}
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /*  horizontalno */
+    justify-content: center; /* vertikalno */
+    /*border: 3px solid rgb(255, 8, 0); /* Za proveru granica */
+    background-color:rgba(0, 255, 255, 0.532);
+    max-width: 1200px; /* Maksimalna širina */
+    width: 100%; /* Da zauzima celu širinu */
+    padding: 5px; /* Dodaj padding za dodatni prostor */
+    box-sizing: border-box; /* Ukupno računanje veličine, uključuje padding i granice */
+    margin: 0 auto; /* Centriranje celog kontejnera unutar body-ja */
+}
+
+/* Navbar */
+.navbar {
+    font-size: 32px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(6, 144, 146, 0.705);
+    width: 100%;
+}
+
+.logoBtnDiv {
+    background-color: rgb(6, 144, 146);
+    color: aliceblue;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    padding: 10px;
+    border: 1px solid rgb(0, 255, 242);
+    border-radius: 8px;
+    cursor: pointer;
+
+}
+
+.desniNavDiv {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.linkBtn {
+    padding: 10px 15px;
+    margin-left: 10px;
+    background-color: rgb(6, 144, 146);
+    color: #f0f0f0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px; 
+}
+
+.linkBtn:hover {
+    background-color: rgb(6, 237, 241);
+}
+
+/* Carousel
+
+*/
+
+
+.carouselDiv {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    overflow: hidden;
+    width: 100%; 
+    position: relative;
+    box-sizing: border-box; /* Uključuje padding i granice u širinu */
+
+}
+
+.kontejnerZaSliku {
+    display: flex;
+    transition: transform 0.5s ease;
+    width: 100%;
+}
+
+.carouselSlika {
+    width: 100%; /* Slike će se prilagoditi */
+    max-width:720px; /* Maksimalna širina slika */
+    height: auto;
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+.previous, .next {
+    background-color: rgba(255, 255, 255, 0.675);
+    border: none;
+    cursor: pointer;
+    font-size: 32px;
+    color: rgba(245, 245, 245, 0.61);
+    padding: 10px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    transition: background-color 0.3s ease;
+    height: 100%;
+}
+
+.previous:hover, .next:hover {
+    background-color: #FF5733;
+}
+
+.previous {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}
+
+/* Sekcija "O nama" */
+.onama {
+    display: flex;
+    flex-direction: column; 
+    justify-content: center; /* Vertikalno centriranje */
+    align-items: center; /* Horizontalno centriranje */
+    text-align: center; /* Centriranje teksta unutar elementa */
+
+    background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20220522/pngtree-city-background-architectural-with-drawings-of-modern-for-use-web-image_1384518.jpg');
+    background-size: cover; /* Podesi da slika pokrije celu površinu */
+    background-position: center; /* Centriraj sliku */
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+
+    flex-wrap: wrap; 
+    padding: 40px 20px; /* Povećan padding za bolji razmak */
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 25px;
+    color: whitesmoke;
+    box-sizing: border-box; 
+    width: 100%;
+    max-width: 1400px; 
+    margin: 0 auto; /* Centriranje sekcije */
+    border-radius: 8px; 
+}
+
+
+
+ 
+    @media (max-width: 768px) {
+        .mainContainer {
+            padding: 5%;
+        }
+
+        .navbar {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .carouselDiv {
+            width: 100%; 
+        }
+
+        .desniNavDiv {
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .carouselSlika {
+            max-width: 100%; 
+        }
+
+        .oNama {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .leviTextDiv, .desniTextDiv {
+            max-width: 100%;
+            margin-bottom: 20px;
+        }
+
+       
+
+    }
+
+
+.usluge {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    align-items: center; /* horizontalno */
+    width: 100%;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 25px;
+    color: whitesmoke;
+    
+    background-image: url('https://wallpaperaccess.com/full/5196806.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    
+}
+.tekstUsluge {
+    text-align: center; /* Centriranje naslova i teksta */
+    margin-bottom: 40px; 
+}
+.tekstUsluge p {
+    font-size: 18px; 
+    line-height: 1.6; /* Povećava razmak između linija */
+    max-width: 800px; /* Ograničava širinu teksta */
+    margin: 0 auto; 
+}
+.nosacDivova {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+}
+.mala3diva{
+    display: flex;
+    flex-direction: column;
+    font-size:20px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.1); 
+    border-radius: 8px;
+    width: 30%; 
+    text-align: start;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    margin: 30px;
+}
+
+.kontKontakt{
+    display: flex;
+    flex-direction: row;
+}
+
+
+
+.kontakt{
+    
+    display: flex;
+    flex-direction: column;
+    width: 600px; /* Maksimalna širina sekcije */
+    margin: 0 auto; /* Centriranje sekcije */
+    padding: 20px; 
+    border-radius: 8px; 
+    font-size: 24px;
+
+    color: whitesmoke;
+}
+.kontakt h2 {
+    text-align: start; 
+    margin-bottom: 20px; 
+}
+
+.kontakt label {
+    display: block; 
+    margin: 10px 0 5px; 
+    font-weight: bold; 
+}
+
+.kontakt input, .kontakt textarea {
+    display: flex;
+    flex-direction: column;
+    width: 100%; 
+    padding: 10px; 
+    border: 1px solid #ffffff; 
+    border-radius: 4px; 
+    box-sizing: border-box; 
+    margin-bottom: 15px; 
+}
+
+.kontakt textarea {
+    resize: none; 
+}
+
+.kontakt button {
+    width: 100%; 
+    padding: 10px; 
+    background-color: #007bff; 
+    color: white; 
+    border: none; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    font-size: 20px; 
+}
+
+.kontakt button:hover {
+    background-color: #0056b3; 
+}
+
+.projekti{
+    display: flex;
+    flex-direction: column;
+}
+.sekcijaProjekti{
+    color: whitesmoke;
+    font-size: 32px;
+    background-color: rgba(0, 166, 149, 0.888);
+    align-items: center;
+    padding-top: 10px;
+    gap: 10px;
+}
+.kontaktDesno, .drustvene{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-content: space-around;
+    margin: 20px;
+    padding: 20px;
+    color: whitesmoke;
+    font-size: 28px;
+    border: 1px solid cyan;
+    background-color: rgba(0, 255, 255, 0.566);
+    border-radius: 8px;
+}
