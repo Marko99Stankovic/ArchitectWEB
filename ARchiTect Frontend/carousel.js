@@ -1,6 +1,6 @@
 export class Carousel {
-    constructor() {
-        this.nizSlika = [];
+    constructor(nizSlika = []) {
+        this.nizSlika = nizSlika;
         this.currentIndex = 0;
     }
 
@@ -13,16 +13,7 @@ export class Carousel {
         kontejnerZaSliku.classList.add('kontejnerZaSliku');
         carouselDiv.appendChild(kontejnerZaSliku);
         
-        //fetch
-
-
-        this.nizSlika = [
-            "https://plus.unsplash.com/premium_photo-1661915661139-5b6a4e4a6fcc?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bW9kZXJuJTIwaG91c2V8ZW58MHx8MHx8fDA%3D",
-            "https://images.unsplash.com/photo-1513584684374-8bab748fbf90?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bW9kZXJuJTIwaG91c2V8ZW58MHx8MHx8fDA%3D",
-            "https://plus.unsplash.com/premium_photo-1661883982941-50af7720a6ff?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDR8fHxlbnwwfHx8fHw%3D",
-            "https://plus.unsplash.com/premium_photo-1686782502813-51579b55f6d8?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8bW9kZXJuJTIwaG91c2V8ZW58MHx8MHx8fDA%3D",
-            "https://www.dsidesign.rs/wp-content/uploads/2017/03/3D-Enerijer-dnevnog-boravka-10.jpg"
-        ];
+        // kada primi niz ...
 
         this.nizSlika.forEach((el) => {
             let slika = document.createElement("img");
