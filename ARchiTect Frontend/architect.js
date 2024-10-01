@@ -1,6 +1,5 @@
 import { Carousel } from "./carousel.js";
 import { Kontakt } from "./kontakt.js";
-import { Projekti } from "./nasiprojekti.js";
 
 export class Architect{
     constructor(){

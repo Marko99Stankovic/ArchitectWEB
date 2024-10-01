@@ -1,5 +1,5 @@
 
- /*                                  //ovo je prva gruba verzija koda
+ /*     //ovo je prva gruba verzija koda /// SKICA sajta
  export class Navbar{
      constructor(){
          this.kontejner = null;
