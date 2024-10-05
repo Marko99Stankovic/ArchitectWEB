@@ -8,35 +8,66 @@ export class Architect{
     crtajMainKontejner(host){
         this.kontejner = document.createElement("div");
         this.kontejner.classList.add("mainContainer");
- //              this.kontejner.innerHTML = "MAIN";
         host.appendChild(this.kontejner);
+
     ///////////////////////////////////////////////////////
-    //-----------------------------------------------------    
-        this.crtajNavbarDiv(this.kontejner);
 
-        //ovde FETCH get metoda; ili niz iz klase gde je pozvan fetch
-            this.nizSlika1 = [
-                "https://plus.unsplash.com/premium_photo-1661915661139-5b6a4e4a6fcc?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bW9kZXJuJTIwaG91c2V8ZW58MHx8MHx8fDA%3D",
-                "https://images.unsplash.com/photo-1513584684374-8bab748fbf90?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bW9kZXJuJTIwaG91c2V8ZW58MHx8MHx8fDA%3D",
-                "https://plus.unsplash.com/premium_photo-1661883982941-50af7720a6ff?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDR8fHxlbnwwfHx8fHw%3D",
-                "https://plus.unsplash.com/premium_photo-1686782502813-51579b55f6d8?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8bW9kZXJuJTIwaG91c2V8ZW58MHx8MHx8fDA%3D",
-                "https://www.dsidesign.rs/wp-content/uploads/2017/03/3D-Enerijer-dnevnog-boravka-10.jpg"
-            ];
-        //GALERIJA
-        let galerija = new Carousel(this.nizSlika1);
-        galerija.crtajGaleriju(this.kontejner);
-        
-        this.crtajSekcijuOnama(this.kontejner);
-        this.crtajSekcijuUsluge(this.kontejner);
+    this.crtajNavbarDiv(this.kontejner);
 
-        //
-        this.crtajSekcijuProjekti(this.kontejner);
+    let nizSlikaF=[];
+    let nizProjekataF=[];
+    fetch('https://x8ki-letl-twmt.n7.xano.io/api:0UhJQwb3/galerija').then(resp=>{
+            resp.json().then(slike=>{
+                slike.forEach(el=>{
+                    console.log(el);
+                    nizSlikaF.push(el.slike_najboljih_projekata.url);
+                
+                })
+                let galerijaF = new Carousel(nizSlikaF);
+                galerijaF.crtajGaleriju(this.kontejner);
+                        
+            //        this.nizSlika1 = [
+                        "https://plus.unsplash.com/premium_photo-1661915661139-5b6a4e4a6fcc?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bW9kZXJuJTIwaG91c2V8ZW58MHx8MHx8fDA%3D",
+                        "https://images.unsplash.com/photo-1513584684374-8bab748fbf90?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bW9kZXJuJTIwaG91c2V8ZW58MHx8MHx8fDA%3D",
+                        "https://plus.unsplash.com/premium_photo-1661883982941-50af7720a6ff?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDR8fHxlbnwwfHx8fHw%3D",
+                        "https://plus.unsplash.com/premium_photo-1686782502813-51579b55f6d8?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8bW9kZXJuJTIwaG91c2V8ZW58MHx8MHx8fDA%3D",
+                        "https://www.dsidesign.rs/wp-content/uploads/2017/03/3D-Enerijer-dnevnog-boravka-10.jpg"
+            //        ];
+            //    //GALERIJA
+            //    let galerija = new Carousel(this.nizSlika1);
+            //    galerija.crtajGaleriju(this.kontejner);
+                
+                this.crtajSekcijuOnama(this.kontejner);
+                this.crtajSekcijuUsluge(this.kontejner);      
+                this.crtajSekcijuProjekti(this.kontejner);
 
-        //pravi objekat klase i poziva njenu funkciju
-        let kontakt = new Kontakt();
-        kontakt.crtajSekcijuKontakt(this.kontejner);
-        
-      
+        //        this.nizSlika2 = [
+        //            "https://cf.bstatic.com/xdata/images/hotel/max1024x768/171764238.jpg?k=00b6ecacd87725586a1959d1af9612b2cd84d85b909bf071818a13645148804b&o=&hp=1",
+        //            "https://assets-news.housing.com/news/wp-content/uploads/2022/03/31010142/Luxury-house-design-Top-10-tips-to-add-luxury-to-your-house-FEATURE-compressed.jpg",
+        //            "https://www.thelocationguys.co.uk/wp-content/uploads/2023/03/Perfect-Luxury-Location-Houses.jpg",
+        //            "https://i.pinimg.com/originals/7e/e2/56/7ee2569fb6fe306ecaad1d18c78ea362.jpg",
+        //            "https://studioe.sk/wp-content/uploads/2023/07/interier_2.webp"
+        //        
+        //        ];
+        //        let projekti = new Carousel(this.nizSlika2);
+        //        projekti.crtajGaleriju(this.kontejner);
+
+                fetch('https://x8ki-letl-twmt.n7.xano.io/api:0UhJQwb3/projekti').then(resp=>{
+                    resp.json().then(slike => {
+                        slike.forEach(el=>{
+                            console.log(el);
+                            nizProjekataF.push(el.slikeprojekta.url);
+                        })
+                        let projetiF = new Carousel(nizProjekataF);
+                        projetiF.crtajGaleriju(this.kontejner);
+
+                        //pravi objekat klase i poziva njenu funkciju
+                    let kontakt = new Kontakt();
+                    kontakt.crtajSekcijuKontakt(this.kontejner);
+                    })
+                });
+            })
+        });
 
     }
     crtajNavbarDiv(host){
@@ -52,7 +83,7 @@ export class Architect{
     crtajLogoDiv(host){
         let logoBtnDiv = document.createElement("div");
         logoBtnDiv.className = "logoBtnDiv";
-        logoBtnDiv.innerHTML = "ARchiTect";
+        logoBtnDiv.innerHTML = `<span style = "color: cyan">AR</span>chi<span style = "color: cyan">T</span>ect`;
         host.appendChild(logoBtnDiv);
     }
     crtajDesniNAVdiv(host){
@@ -96,11 +127,6 @@ export class Architect{
             stvarajući prostore koji inspirišu i ostavljaju trajni utisak.</p>
         `;  ;
         host.appendChild(sekcijaOnama);
-
-
-        
-  
-
     }
     crtajSekcijuUsluge(host){
         let sekcijaUsluge = document.createElement("div");
@@ -140,17 +166,5 @@ export class Architect{
         projektiDiv.classList.add("sekcijaProjekti", "projekti");
         projektiDiv.innerHTML = "Naši projekti";
         host.appendChild(projektiDiv);
-
-        //ovde FETCH get metoda; ili niz iz klase gde je pozvan fetch
-        let nizSlika2 = [
-            "https://cf.bstatic.com/xdata/images/hotel/max1024x768/171764238.jpg?k=00b6ecacd87725586a1959d1af9612b2cd84d85b909bf071818a13645148804b&o=&hp=1",
-            "https://assets-news.housing.com/news/wp-content/uploads/2022/03/31010142/Luxury-house-design-Top-10-tips-to-add-luxury-to-your-house-FEATURE-compressed.jpg",
-            "https://www.thelocationguys.co.uk/wp-content/uploads/2023/03/Perfect-Luxury-Location-Houses.jpg",
-            "https://i.pinimg.com/originals/7e/e2/56/7ee2569fb6fe306ecaad1d18c78ea362.jpg"
-        
-        ];
-        let projekti = new Carousel(nizSlika2);
-        projekti.crtajGaleriju(projektiDiv);
-
     }
 }

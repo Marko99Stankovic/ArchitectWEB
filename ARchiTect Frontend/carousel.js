@@ -2,6 +2,7 @@ export class Carousel {
     constructor(nizSlika = []) {
         this.nizSlika = nizSlika;
         this.currentIndex = 0;
+        this.carouselMoving = false;
     }
 
     crtajGaleriju(host) {
@@ -12,20 +13,27 @@ export class Carousel {
         let kontejnerZaSliku = document.createElement("div");
         kontejnerZaSliku.classList.add('kontejnerZaSliku');
         carouselDiv.appendChild(kontejnerZaSliku);
-        
-        // kada primi niz ...
 
-        this.nizSlika.forEach((el) => {
+        // Dodajemo slike u carousel, plus kopiramo prvu i poslednju za beskonačnost
+        const firstClone = this.nizSlika[0];
+        const lastClone = this.nizSlika[this.nizSlika.length - 1];
+
+        let slikaZaDodati = [lastClone, ...this.nizSlika, firstClone];
+
+        slikaZaDodati.forEach((el) => {
             let slika = document.createElement("img");
             slika.src = el;
-            slika.alt = 'SlikaNaseZgrade';
+            slika.alt = 'Slika';
             slika.classList.add('carouselSlika');
             kontejnerZaSliku.appendChild(slika);
         });
 
+        // Postavimo početnu poziciju
+        this.currentIndex = 1;
+        kontejnerZaSliku.style.transform = `translateX(-${this.currentIndex * 100}%)`;
+
         this.setupNavigation(carouselDiv, kontejnerZaSliku);
         this.autoScroll(kontejnerZaSliku);
-        this.updateCarousel(kontejnerZaSliku);
     }
 
     setupNavigation(carouselDiv, kontejnerZaSliku) {
@@ -40,26 +48,57 @@ export class Carousel {
         carouselDiv.appendChild(nextBtn);
 
         prevBtn.addEventListener('click', () => {
-            this.currentIndex = (this.currentIndex > 0) ? this.currentIndex - 1 : this.nizSlika.length - 1;
-            this.updateCarousel(kontejnerZaSliku);
+            if (!this.carouselMoving) {
+                this.moveToPrevious(kontejnerZaSliku);
+            }
         });
 
         nextBtn.addEventListener('click', () => {
-            this.currentIndex = (this.currentIndex < this.nizSlika.length - 1) ? this.currentIndex + 1 : 0;
-            this.updateCarousel(kontejnerZaSliku);
+            if (!this.carouselMoving) {
+                this.moveToNext(kontejnerZaSliku);
+            }
         });
     }
 
-    updateCarousel(kontejnerZaSliku) {
-        const offset = -this.currentIndex * 450; // 450px je širina slike
-        kontejnerZaSliku.style.transform = `translateX(${offset}px)`; // Animacija za pomeranje slika
-        localStorage.setItem('currentIndex', this.currentIndex); // Sačuvaj trenutni indeks u localStorage
+    moveToPrevious(kontejnerZaSliku) {
+        this.carouselMoving = true;
+        this.currentIndex--;
+        kontejnerZaSliku.style.transition = "transform 0.5s ease-in-out";
+        kontejnerZaSliku.style.transform = `translateX(-${this.currentIndex * 100}%)`;
+
+        // Kada stignemo do klonirane poslednje slike, preskoči nazad na pravu poslednju sliku
+        kontejnerZaSliku.addEventListener('transitionend', () => {
+            if (this.currentIndex === 0) {
+                kontejnerZaSliku.style.transition = "none";
+                this.currentIndex = this.nizSlika.length;
+                kontejnerZaSliku.style.transform = `translateX(-${this.currentIndex * 100}%)`;
+            }
+            this.carouselMoving = false;
+        });
+    }
+
+    moveToNext(kontejnerZaSliku) {
+        this.carouselMoving = true;
+        this.currentIndex++;
+        kontejnerZaSliku.style.transition = "transform 0.5s ease-in-out";
+        kontejnerZaSliku.style.transform = `translateX(-${this.currentIndex * 100}%)`;
+
+        // Kada stignemo do klonirane prve slike, preskoči nazad na pravu prvu sliku
+        kontejnerZaSliku.addEventListener('transitionend', () => {
+            if (this.currentIndex === this.nizSlika.length + 1) {
+                kontejnerZaSliku.style.transition = "none";
+                this.currentIndex = 1;
+                kontejnerZaSliku.style.transform = `translateX(-${this.currentIndex * 100}%)`;
+            }
+            this.carouselMoving = false;
+        });
     }
 
     autoScroll(kontejnerZaSliku) {
         setInterval(() => {
-            this.currentIndex = (this.currentIndex < this.nizSlika.length - 1) ? this.currentIndex + 1 : 0;
-            this.updateCarousel(kontejnerZaSliku);
-        }, 3000); // Pomeranje svake 3 sekunde
+            if (!this.carouselMoving) {
+                this.moveToNext(kontejnerZaSliku);
+            }
+        }, 3000);
     }
 }

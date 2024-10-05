@@ -27,7 +27,6 @@ export class Kontakt{
         nizLabela.forEach((el, indeks) => {
             labela = document.createElement("label");
             labela.innerHTML = el;
-            labela.setAttribute("for", nizInputa[indeks]); // Postavljanje for atributa
             kontaktSekcija.appendChild(labela);
             
             if (el === "Poruka") {
@@ -57,8 +56,10 @@ export class Kontakt{
             nizInputa.forEach((input)=>{
                 let poljeInput = kontaktSekcija.querySelector(`.${input}`);
                 podaci[input] = poljeInput.value;
+                //ovde 
             });
             console.log("Poslati podaci:", podaci);
+            
             alert("Podaci su poslati!");
         });
 
