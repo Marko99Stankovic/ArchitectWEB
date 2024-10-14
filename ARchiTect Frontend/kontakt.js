@@ -19,12 +19,11 @@ export class Kontakt{
         kontaktSekcija.innerHTML = "<h2>Kontakt</h2>";
         this.kontKontakt.appendChild(kontaktSekcija);
 
-        let nizLabela = ["Ime", "Prezime", "Broj telefona", "Email",  "Poruka"];
-        let nizInputa = ["ime", "prezime", "broj", "email", "poruka"];
+        let nizInputa = ["Ime", "Prezime", "Broj", "Email", "Poruka"];
         let labela;
         let polje;
 
-        nizLabela.forEach((el, indeks) => {
+        nizInputa.forEach((el, indeks) => {
             labela = document.createElement("label");
             labela.innerHTML = el;
             kontaktSekcija.appendChild(labela);
@@ -34,6 +33,7 @@ export class Kontakt{
                 polje = document.createElement("textarea");
                 polje.classList.add(nizInputa[indeks]);
                 polje.placeholder = "Unesite vašu poruku"; // Placeholder za textarea
+                polje.classList.add(nizInputa[indeks]);
                 polje.rows = 10; // Postavljanje broja redova
             } else {
                 // Za ostale inpute koristi input tipa text
@@ -45,25 +45,50 @@ export class Kontakt{
             
             kontaktSekcija.appendChild(polje);
         });
-
         //-------------------------------... ubaciti fetch/ post metoda podaci -> bazu
         let posaljiBtn = document.createElement("button");
+        posaljiBtn.className = "posaljiBtn";
         posaljiBtn.innerHTML = "Posalji";
-        kontaktSekcija.appendChild(posaljiBtn);
+        kontaktSekcija.appendChild(posaljiBtn);  
 
-        posaljiBtn.addEventListener("click", ()=>{
-            let podaci = [];
-            nizInputa.forEach((input)=>{
-                let poljeInput = kontaktSekcija.querySelector(`.${input}`);
-                podaci[input] = poljeInput.value;
-                //ovde 
-            });
-            console.log("Poslati podaci:", podaci);
-            
-            alert("Podaci su poslati!");
-        });
+        posaljiBtn.onclick = (e)=>{
+            e.preventDefault();
+            let Ime = document.querySelector('.Ime').value;
+            let Prezime = document.querySelector('.Prezime').value;
+            let Broj = document.querySelector('.Broj').value;
+            let Email = document.querySelector('.Email').value;
+            let Poruka = document.querySelector('.Poruka').value;
 
+            if (!Ime || !Prezime || !Broj || !Email || !Poruka) {
+                alert("Molimo popunite sva polja!");
+                return;
+            }            
+            // Validacija email formata koristeći regularni izraz
+            let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(Email)) {
+                alert("Unesite validnu email adresu.");
+                return;
+            }
+        
+            let formData = new FormData();
+            formData.append('Ime', Ime);
+            formData.append('Prezime', Prezime);
+            formData.append('Broj', Broj);
+            formData.append('Email', Email);
+            formData.append('Poruka', Poruka);
 
+            fetch("https://x8ki-letl-twmt.n7.xano.io/api:0UhJQwb3/klijenti", {
+                method: 'POST',
+                body: formData
+            }).then(resp => {
+                resp.json().then(data=>{
+                    console.log("ovo ide u bazu", data);
+                }).catch(error=>{
+                    console.log('Greska', error);
+                    alert("Doslo je do greske! Pogledati konzolu!");
+                })
+            })
+        }
         let kontaktDesno = document.createElement("div");
         kontaktDesno.classList.add("kontaktDesno");
         kontaktDesno.innerHTML = "<h2>Info</h2>";
@@ -79,4 +104,5 @@ export class Kontakt{
 
         });
     }
+    
 }
